@@ -1,0 +1,762 @@
+{
+  "metadata": {
+    "title": "SubnetMagic - CCNA Subnetting Question Bank",
+    "description": "Extracted and verified subnetting questions from CISCO CCNA 200-301 Mock Tests",
+    "source": "CISCO CCNA 200-301 Exam Mock Tests (Abound Academy)",
+    "total_questions": 39,
+    "categories": {
+      "easy": "CIDR conversion, subnet mask identification, host count",
+      "medium": "Network/broadcast address calculation, host ranges, wildcard masks",
+      "hard": "VLSM, subnet design, summary routes, multi-subnet planning"
+    }
+  },
+  "questions": {
+    "easy": [
+      {
+        "question": "What is the subnet mask for a /27 prefix?",
+        "options": [
+          "255.255.255.224",
+          "255.255.255.240",
+          "255.255.255.192",
+          "255.255.255.248"
+        ],
+        "answer": "255.255.255.224",
+        "explanation": {
+          "magic_number": 32,
+          "block": "192.168.1.0 - 192.168.1.31",
+          "network_id": "192.168.1.0",
+          "broadcast": "192.168.1.31",
+          "usable_range": "192.168.1.1 - 192.168.1.30",
+          "host_count": 30,
+          "note": "/27 = 11111111.11111111.11111111.11100000 = 255.255.255.224. Last octet: 128+64+32 = 224."
+        }
+      },
+      {
+        "question": "What is the CIDR notation for subnet mask 255.255.255.240?",
+        "options": [
+          "/26",
+          "/27",
+          "/28",
+          "/29"
+        ],
+        "answer": "/28",
+        "explanation": {
+          "magic_number": 16,
+          "block": "192.168.1.0 - 192.168.1.15",
+          "network_id": "192.168.1.0",
+          "broadcast": "192.168.1.15",
+          "usable_range": "192.168.1.1 - 192.168.1.14",
+          "host_count": 14,
+          "note": "255.255.255.240 = 11111111.11111111.11111111.11110000. Count 1s: 24+4 = 28 bits. So /28."
+        }
+      },
+      {
+        "question": "How many usable host addresses are available in a /30 subnet?",
+        "options": [
+          "6",
+          "4",
+          "2",
+          "8"
+        ],
+        "answer": "2",
+        "explanation": {
+          "magic_number": 4,
+          "block": "10.2.1.0 - 10.2.1.3",
+          "network_id": "10.2.1.0",
+          "broadcast": "10.2.1.3",
+          "usable_range": "10.2.1.1 - 10.2.1.2",
+          "host_count": 2,
+          "note": "/30 leaves 2 host bits. 2^2 - 2 = 2 usable hosts. Ideal for point-to-point WAN links."
+        }
+      },
+      {
+        "question": "How many usable host addresses does a /24 subnet provide?",
+        "options": [
+          "256",
+          "255",
+          "254",
+          "252"
+        ],
+        "answer": "254",
+        "explanation": {
+          "magic_number": 256,
+          "block": "10.0.0.0 - 10.0.0.255",
+          "network_id": "10.0.0.0",
+          "broadcast": "10.0.0.255",
+          "usable_range": "10.0.0.1 - 10.0.0.254",
+          "host_count": 254,
+          "note": "2^8 - 2 = 256 - 2 = 254 usable hosts. Subtract 1 for network address and 1 for broadcast."
+        }
+      },
+      {
+        "question": "What is the subnet mask for a /29 prefix?",
+        "options": [
+          "255.255.255.240",
+          "255.255.255.248",
+          "255.255.255.252",
+          "255.255.255.224"
+        ],
+        "answer": "255.255.255.248",
+        "explanation": {
+          "magic_number": 8,
+          "block": "192.168.1.0 - 192.168.1.7",
+          "network_id": "192.168.1.0",
+          "broadcast": "192.168.1.7",
+          "usable_range": "192.168.1.1 - 192.168.1.6",
+          "host_count": 6,
+          "note": "/29 = last octet 11111000 = 128+64+32+16+8 = 248. So 255.255.255.248."
+        }
+      },
+      {
+        "question": "What CIDR prefix provides exactly 2 usable hosts per subnet \u2014 ideal for WAN point-to-point links?",
+        "options": [
+          "/27",
+          "/28",
+          "/30",
+          "/29"
+        ],
+        "answer": "/30",
+        "explanation": {
+          "magic_number": 4,
+          "block": "172.16.0.0 - 172.16.0.3",
+          "network_id": "172.16.0.0",
+          "broadcast": "172.16.0.3",
+          "usable_range": "172.16.0.1 - 172.16.0.2",
+          "host_count": 2,
+          "note": "/30 yields 2^2-2 = 2 usable host addresses. Perfect for router-to-router WAN links with zero wasted addresses."
+        }
+      },
+      {
+        "question": "How many usable hosts does a /29 subnet support?",
+        "options": [
+          "14",
+          "8",
+          "4",
+          "6"
+        ],
+        "answer": "6",
+        "explanation": {
+          "magic_number": 8,
+          "block": "192.168.1.0 - 192.168.1.7",
+          "network_id": "192.168.1.0",
+          "broadcast": "192.168.1.7",
+          "usable_range": "192.168.1.1 - 192.168.1.6",
+          "host_count": 6,
+          "note": "/29 has 3 host bits. 2^3 - 2 = 6 usable hosts."
+        }
+      },
+      {
+        "question": "Which subnet mask is equivalent to /23?",
+        "options": [
+          "255.255.0.0",
+          "255.255.254.0",
+          "255.255.252.0",
+          "255.255.128.0"
+        ],
+        "answer": "255.255.254.0",
+        "explanation": {
+          "magic_number": 2,
+          "block": "192.168.0.0 - 192.168.1.255",
+          "network_id": "192.168.0.0",
+          "broadcast": "192.168.1.255",
+          "usable_range": "192.168.0.1 - 192.168.1.254",
+          "host_count": 510,
+          "note": "/23 uses 23 bits. Third octet: 11111110 = 254. So 255.255.254.0."
+        }
+      },
+      {
+        "question": "How many usable hosts does a /28 subnet provide?",
+        "options": [
+          "30",
+          "16",
+          "14",
+          "12"
+        ],
+        "answer": "14",
+        "explanation": {
+          "magic_number": 16,
+          "block": "192.168.1.0 - 192.168.1.15",
+          "network_id": "192.168.1.0",
+          "broadcast": "192.168.1.15",
+          "usable_range": "192.168.1.1 - 192.168.1.14",
+          "host_count": 14,
+          "note": "/28 has 4 host bits. 2^4 - 2 = 14 usable hosts."
+        }
+      },
+      {
+        "question": "What is the subnet mask for a /26 prefix?",
+        "options": [
+          "255.255.255.128",
+          "255.255.255.192",
+          "255.255.255.224",
+          "255.255.255.240"
+        ],
+        "answer": "255.255.255.192",
+        "explanation": {
+          "magic_number": 64,
+          "block": "192.168.1.0 - 192.168.1.63",
+          "network_id": "192.168.1.0",
+          "broadcast": "192.168.1.63",
+          "usable_range": "192.168.1.1 - 192.168.1.62",
+          "host_count": 62,
+          "note": "/26 has 6 host bits. Last octet network portion: 128+64=192. So 255.255.255.192."
+        }
+      }
+    ],
+    "medium": [
+      {
+        "question": "What is the broadcast address of the subnet 192.168.10.64/27?",
+        "options": [
+          "192.168.10.95",
+          "192.168.10.127",
+          "192.168.10.96",
+          "192.168.10.63"
+        ],
+        "answer": "192.168.10.95",
+        "explanation": {
+          "magic_number": 32,
+          "block": "192.168.10.64 - 192.168.10.95",
+          "network_id": "192.168.10.64",
+          "broadcast": "192.168.10.95",
+          "usable_range": "192.168.10.65 - 192.168.10.94",
+          "host_count": 30,
+          "note": "Magic number = 256-224 = 32. Block: 64-95. Network: .64, Broadcast: .95."
+        }
+      },
+      {
+        "question": "What is the network address for host IP 192.168.1.130/25?",
+        "options": [
+          "192.168.1.0",
+          "192.168.1.128",
+          "192.168.1.129",
+          "192.168.1.127"
+        ],
+        "answer": "192.168.1.128",
+        "explanation": {
+          "magic_number": 128,
+          "block": "192.168.1.128 - 192.168.1.255",
+          "network_id": "192.168.1.128",
+          "broadcast": "192.168.1.255",
+          "usable_range": "192.168.1.129 - 192.168.1.254",
+          "host_count": 126,
+          "note": "Magic number = 256-128 = 128. Blocks: 0-127, 128-255. 130 falls in block 128-255. Network = .128."
+        }
+      },
+      {
+        "question": "Which is the usable host range for subnet 10.0.0.0/30?",
+        "options": [
+          "10.0.0.0 - 10.0.0.3",
+          "10.0.0.1 - 10.0.0.2",
+          "10.0.0.1 - 10.0.0.6",
+          "10.0.0.0 - 10.0.0.255"
+        ],
+        "answer": "10.0.0.1 - 10.0.0.2",
+        "explanation": {
+          "magic_number": 4,
+          "block": "10.0.0.0 - 10.0.0.3",
+          "network_id": "10.0.0.0",
+          "broadcast": "10.0.0.3",
+          "usable_range": "10.0.0.1 - 10.0.0.2",
+          "host_count": 2,
+          "note": "/30 block size = 4. Network = .0, Broadcast = .3. Usable: .1 to .2."
+        }
+      },
+      {
+        "question": "A technician needs to configure a /30 subnet between two routers. Which IP and mask combination meets this requirement?",
+        "options": [
+          "10.2.1.3 / 255.255.255.252",
+          "192.168.1.1 / 255.255.255.248",
+          "172.16.1.4 / 255.255.255.248",
+          "209.165.201.2 / 225.255.255.252"
+        ],
+        "answer": "10.2.1.3 / 255.255.255.252",
+        "explanation": {
+          "magic_number": 4,
+          "block": "10.2.1.0 - 10.2.1.3",
+          "network_id": "10.2.1.0",
+          "broadcast": "10.2.1.3",
+          "usable_range": "10.2.1.1 - 10.2.1.2",
+          "host_count": 2,
+          "note": "/30 = 255.255.255.252. This gives exactly 2 usable hosts. 10.2.1.3 falls in the 10.2.1.0/30 subnet."
+        }
+      },
+      {
+        "question": "What is the broadcast address for the subnet 192.168.1.0/26?",
+        "options": [
+          "192.168.1.127",
+          "192.168.1.63",
+          "192.168.1.64",
+          "192.168.1.255"
+        ],
+        "answer": "192.168.1.63",
+        "explanation": {
+          "magic_number": 64,
+          "block": "192.168.1.0 - 192.168.1.63",
+          "network_id": "192.168.1.0",
+          "broadcast": "192.168.1.63",
+          "usable_range": "192.168.1.1 - 192.168.1.62",
+          "host_count": 62,
+          "note": "Magic number = 256-192 = 64. Block: 0-63. Network = .0, Broadcast = .63."
+        }
+      },
+      {
+        "question": "You are given subnet 192.168.100.0/26. Your boss asks you to use host addresses from the second available subnet. Which range do you use?",
+        "options": [
+          "192.168.100.129 - 192.168.100.190",
+          "192.168.100.65 - 192.168.100.126",
+          "192.168.100.193 - 192.168.100.254",
+          "192.168.100.1 - 192.168.100.62"
+        ],
+        "answer": "192.168.100.65 - 192.168.100.126",
+        "explanation": {
+          "magic_number": 64,
+          "block": "192.168.100.64 - 192.168.100.127",
+          "network_id": "192.168.100.64",
+          "broadcast": "192.168.100.127",
+          "usable_range": "192.168.100.65 - 192.168.100.126",
+          "host_count": 62,
+          "note": "Block size = 64. Subnets: .0/26 (1st), .64/26 (2nd), .128/26 (3rd), .192/26 (4th). 2nd subnet usable hosts: .65-.126."
+        }
+      },
+      {
+        "question": "You are allocated 172.16.32.0/19. Which range of host addresses can be used?",
+        "options": [
+          "172.16.128.1 - 172.16.159.254",
+          "172.16.96.1 - 172.16.127.254",
+          "172.16.32.1 - 172.16.63.254",
+          "172.16.32.1 - 172.16.127.254"
+        ],
+        "answer": "172.16.32.1 - 172.16.63.254",
+        "explanation": {
+          "magic_number": 32,
+          "block": "172.16.32.0 - 172.16.63.255",
+          "network_id": "172.16.32.0",
+          "broadcast": "172.16.63.255",
+          "usable_range": "172.16.32.1 - 172.16.63.254",
+          "host_count": 8190,
+          "note": "/19 block in 3rd octet: magic = 256-224=32. Block: 32-63. Network = 172.16.32.0, Broadcast = 172.16.63.255. Hosts: .32.1 to .63.254."
+        }
+      },
+      {
+        "question": "Host 192.168.200.17 is in the subnet 192.168.200.0/29. Which subnet number (ordinal) does this host belong to?",
+        "options": [
+          "1st",
+          "2nd",
+          "3rd",
+          "4th"
+        ],
+        "answer": "3rd",
+        "explanation": {
+          "magic_number": 8,
+          "block": "192.168.200.16 - 192.168.200.23",
+          "network_id": "192.168.200.16",
+          "broadcast": "192.168.200.23",
+          "usable_range": "192.168.200.17 - 192.168.200.22",
+          "host_count": 6,
+          "note": "Block size=8. Subnets: .0 (1st), .8 (2nd), .16 (3rd), .24 (4th)... Host .17 is in the .16 block \u2192 3rd subnet."
+        }
+      },
+      {
+        "question": "What is the network address for host 192.168.10.143 with mask 255.255.255.128?",
+        "options": [
+          "192.168.10.0",
+          "192.168.10.128",
+          "192.168.10.127",
+          "192.168.10.255"
+        ],
+        "answer": "192.168.10.128",
+        "explanation": {
+          "magic_number": 128,
+          "block": "192.168.10.128 - 192.168.10.255",
+          "network_id": "192.168.10.128",
+          "broadcast": "192.168.10.255",
+          "usable_range": "192.168.10.129 - 192.168.10.254",
+          "host_count": 126,
+          "note": "255.255.255.128 = /25. Block size=128. Host 143 falls in block 128-255. Network = .128."
+        }
+      },
+      {
+        "question": "A company with 8 floors has ~30-40 users per floor (320 total). Which subnet mask covers all users in a single subnet?",
+        "options": [
+          "255.255.0.0",
+          "255.255.254.0",
+          "255.255.255.128",
+          "255.255.255.224"
+        ],
+        "answer": "255.255.254.0",
+        "explanation": {
+          "magic_number": 2,
+          "block": "192.168.0.0 - 192.168.1.255",
+          "network_id": "192.168.0.0",
+          "broadcast": "192.168.1.255",
+          "usable_range": "192.168.0.1 - 192.168.1.254",
+          "host_count": 510,
+          "note": "/24 = 254 hosts (not enough for 320). /23 = 510 usable hosts. 255.255.254.0 is the correct mask for /23."
+        }
+      },
+      {
+        "question": "What is the broadcast address of network 192.168.1.192/26?",
+        "options": [
+          "192.168.1.255",
+          "192.168.1.254",
+          "192.168.1.223",
+          "192.168.1.193"
+        ],
+        "answer": "192.168.1.255",
+        "explanation": {
+          "magic_number": 64,
+          "block": "192.168.1.192 - 192.168.1.255",
+          "network_id": "192.168.1.192",
+          "broadcast": "192.168.1.255",
+          "usable_range": "192.168.1.193 - 192.168.1.254",
+          "host_count": 62,
+          "note": "Block size=64. Block 192-255. Network=.192, Broadcast=.255."
+        }
+      },
+      {
+        "question": "Which wildcard mask corresponds to subnet mask 255.255.255.224 (i.e., /27)?",
+        "options": [
+          "0.0.0.63",
+          "0.0.0.15",
+          "0.0.0.31",
+          "0.0.0.127"
+        ],
+        "answer": "0.0.0.31",
+        "explanation": {
+          "magic_number": 32,
+          "block": "192.168.1.0 - 192.168.1.31",
+          "network_id": "192.168.1.0",
+          "broadcast": "192.168.1.31",
+          "usable_range": "192.168.1.1 - 192.168.1.30",
+          "host_count": 30,
+          "note": "Wildcard = inverse of subnet mask. 255-224=31. So wildcard = 0.0.0.31."
+        }
+      },
+      {
+        "question": "Which wildcard mask matches subnet mask 255.255.192.0?",
+        "options": [
+          "0.0.127.255",
+          "0.0.31.255",
+          "0.0.7.255",
+          "0.0.63.255"
+        ],
+        "answer": "0.0.63.255",
+        "explanation": {
+          "magic_number": 64,
+          "block": "172.16.0.0 - 172.16.63.255",
+          "network_id": "172.16.0.0",
+          "broadcast": "172.16.63.255",
+          "usable_range": "172.16.0.1 - 172.16.63.254",
+          "host_count": 16382,
+          "note": "255.255.192.0 = /18. Wildcard = 255-192=63 in 3rd octet, 255 in 4th. So 0.0.63.255."
+        }
+      },
+      {
+        "question": "Your boss asks you to add a wildcard mask to an ACL to block traffic from 192.168.1.4/30. What wildcard do you use?",
+        "options": [
+          "0.0.0.1",
+          "0.0.0.255",
+          "255.255.255.252",
+          "0.0.0.3"
+        ],
+        "answer": "0.0.0.3",
+        "explanation": {
+          "magic_number": 4,
+          "block": "192.168.1.4 - 192.168.1.7",
+          "network_id": "192.168.1.4",
+          "broadcast": "192.168.1.7",
+          "usable_range": "192.168.1.5 - 192.168.1.6",
+          "host_count": 2,
+          "note": "/30 = mask 255.255.255.252. Wildcard = 255-252=3. So 0.0.0.3 matches the /30 subnet."
+        }
+      },
+      {
+        "question": "Which wildcard mask matches subnet 192.168.1.0/27 (mask 255.255.255.224)?",
+        "options": [
+          "0.0.0.31",
+          "0.0.0.127",
+          "0.0.0.15",
+          "0.0.0.63"
+        ],
+        "answer": "0.0.0.31",
+        "explanation": {
+          "magic_number": 32,
+          "block": "192.168.1.0 - 192.168.1.31",
+          "network_id": "192.168.1.0",
+          "broadcast": "192.168.1.31",
+          "usable_range": "192.168.1.1 - 192.168.1.30",
+          "host_count": 30,
+          "note": "Wildcard = 255 - 224 = 31. So wildcard mask = 0.0.0.31."
+        }
+      },
+      {
+        "question": "Network 10.0.0.0/9 generates which subnets? (select all that apply)",
+        "options": [
+          "10.0.0.0 and 10.128.0.0",
+          "10.0.0.0 and 10.64.0.0",
+          "10.32.0.0 and 10.64.0.0",
+          "10.128.0.0 and 10.192.0.0"
+        ],
+        "answer": "10.0.0.0 and 10.128.0.0",
+        "explanation": {
+          "magic_number": 128,
+          "block": "10.0.0.0 - 10.127.255.255",
+          "network_id": "10.0.0.0",
+          "broadcast": "10.127.255.255",
+          "usable_range": "10.0.0.1 - 10.127.255.254",
+          "host_count": 8388606,
+          "note": "/9 borrows 1 bit from the 2nd octet. Block size=128. Subnets: 10.0.0.0/9 and 10.128.0.0/9."
+        }
+      }
+    ],
+    "hard": [
+      {
+        "question": "A corporate office has 4 floors: 25, 30, 27, and 21 users. Which subnet configuration provides the most efficient IP allocation?",
+        "options": [
+          "192.168.0.0/24 summary; 192.168.0.0/28 per floor",
+          "192.168.0.0/23 summary; 192.168.0.0/25 per floor",
+          "192.168.0.0/25 summary; 192.168.0.0/27 per floor",
+          "192.168.0.0/26 summary; 192.168.0.0/29 per floor"
+        ],
+        "answer": "192.168.0.0/25 summary; 192.168.0.0/27 per floor",
+        "explanation": {
+          "magic_number": 128,
+          "block": "192.168.0.0 - 192.168.0.127",
+          "network_id": "192.168.0.0",
+          "broadcast": "192.168.0.127",
+          "usable_range": "192.168.0.1 - 192.168.0.126",
+          "host_count": 126,
+          "note": "/27 = 30 usable hosts per subnet (covers max floor of 30 users). /25 = 126 hosts total (covers 25+30+27+21=103 users). Most efficient choice."
+        }
+      },
+      {
+        "question": "Your boss hands you the subnets: 192.168.100.128/27, .160/27, .192/27, .224/27. What is the best summary route?",
+        "options": [
+          "192.168.100.128/26",
+          "192.168.0.0/24",
+          "192.168.100.128/24",
+          "192.168.100.128/25"
+        ],
+        "answer": "192.168.100.128/25",
+        "explanation": {
+          "magic_number": 128,
+          "block": "192.168.100.128 - 192.168.100.255",
+          "network_id": "192.168.100.128",
+          "broadcast": "192.168.100.255",
+          "usable_range": "192.168.100.129 - 192.168.100.254",
+          "host_count": 126,
+          "note": "Four /27 subnets starting at .128: .128, .160, .192, .224. They all fit in 192.168.100.128/25 (block .128-.255), which is the tightest summary."
+        }
+      },
+      {
+        "question": "You are given 172.16.0.0. What subnet mask generates 16 subnets with 4094 hosts per subnet?",
+        "options": [
+          "/18",
+          "/21",
+          "/17",
+          "/20"
+        ],
+        "answer": "/20",
+        "explanation": {
+          "magic_number": 16,
+          "block": "172.16.0.0 - 172.16.15.255",
+          "network_id": "172.16.0.0",
+          "broadcast": "172.16.15.255",
+          "usable_range": "172.16.0.1 - 172.16.15.254",
+          "host_count": 4094,
+          "note": "/20: borrow 4 bits from class B host portion \u2192 2^4=16 subnets. Host bits = 12 \u2192 2^12-2=4094 hosts. Mask = 255.255.240.0."
+        }
+      },
+      {
+        "question": "You are handed network design 172.16.0.0/20. Which of these statements are true? (choose all correct)",
+        "options": [
+          "16 available subnets; 4094 hosts per subnet; first subnet hosts: 172.16.0.1 - 172.16.15.254",
+          "32 available subnets; 2046 hosts per subnet; first subnet hosts: 172.16.0.1 - 172.16.31.254",
+          "8 subnets; 8190 hosts per subnet; first subnet: 172.16.0.1 - 172.16.31.254",
+          "16 subnets; 1022 hosts per subnet; first subnet: 172.16.1.1 - 172.16.14.254"
+        ],
+        "answer": "16 available subnets; 4094 hosts per subnet; first subnet hosts: 172.16.0.1 - 172.16.15.254",
+        "explanation": {
+          "magic_number": 16,
+          "block": "172.16.0.0 - 172.16.15.255",
+          "network_id": "172.16.0.0",
+          "broadcast": "172.16.15.255",
+          "usable_range": "172.16.0.1 - 172.16.15.254",
+          "host_count": 4094,
+          "note": "/20 borrows 4 bits from 3rd octet. 2^4=16 subnets. 2^12-2=4094 hosts. First subnet block: 172.16.0.0-172.16.15.255. Hosts: .0.1-.15.254."
+        }
+      },
+      {
+        "question": "What is true about subnet 192.168.1.0/27? (choose all that apply)",
+        "options": [
+          "8 subnets and 30 hosts per subnet",
+          "16 subnets and 62 hosts per subnet",
+          "4 subnets and 60 hosts per subnet",
+          "8 subnets and 32 hosts per subnet"
+        ],
+        "answer": "8 subnets and 30 hosts per subnet",
+        "explanation": {
+          "magic_number": 32,
+          "block": "192.168.1.0 - 192.168.1.31",
+          "network_id": "192.168.1.0",
+          "broadcast": "192.168.1.31",
+          "usable_range": "192.168.1.1 - 192.168.1.30",
+          "host_count": 30,
+          "note": "Class C base /24. Borrowing 3 bits \u2192 2^3=8 subnets. Host bits=5 \u2192 2^5-2=30 usable hosts per subnet."
+        }
+      },
+      {
+        "question": "You are handed 172.16.0.0/19. What is true about this design? (choose all that apply)",
+        "options": [
+          "8 subnets and 8190 hosts per subnet",
+          "4 subnets and 4094 hosts per subnet",
+          "16 subnets and 2046 hosts per subnet",
+          "32 subnets and 1022 hosts per subnet"
+        ],
+        "answer": "8 subnets and 8190 hosts per subnet",
+        "explanation": {
+          "magic_number": 32,
+          "block": "172.16.0.0 - 172.16.31.255",
+          "network_id": "172.16.0.0",
+          "broadcast": "172.16.31.255",
+          "usable_range": "172.16.0.1 - 172.16.31.254",
+          "host_count": 8190,
+          "note": "Class B base /16. Borrowing 3 bits \u2192 2^3=8 subnets. Host bits=13 \u2192 2^13-2=8190 hosts per subnet."
+        }
+      },
+      {
+        "question": "A new office needs 21 users added. The existing subnets use 10.10.225.0/27. Which IP and mask minimizes wasted addresses for the new subnet?",
+        "options": [
+          "10.10.225.48 / 255.255.255.240",
+          "10.10.225.32 / 255.255.255.240",
+          "10.10.225.48 / 255.255.255.224",
+          "10.10.225.32 / 255.255.255.224"
+        ],
+        "answer": "10.10.225.32 / 255.255.255.224",
+        "explanation": {
+          "magic_number": 32,
+          "block": "10.10.225.32 - 10.10.225.63",
+          "network_id": "10.10.225.32",
+          "broadcast": "10.10.225.63",
+          "usable_range": "10.10.225.33 - 10.10.225.62",
+          "host_count": 30,
+          "note": "21 users need at least 23 addresses. /27=30 usable hosts. Mask 255.255.255.224. Block size=32. Next subnet after .0/27 is .32/27. Network ID = 10.10.225.32."
+        }
+      },
+      {
+        "question": "An ISP assigns you 192.168.100.0/26. How many host addresses are available in this block?",
+        "options": [
+          "62",
+          "64",
+          "30",
+          "126"
+        ],
+        "answer": "62",
+        "explanation": {
+          "magic_number": 64,
+          "block": "192.168.100.0 - 192.168.100.63",
+          "network_id": "192.168.100.0",
+          "broadcast": "192.168.100.63",
+          "usable_range": "192.168.100.1 - 192.168.100.62",
+          "host_count": 62,
+          "note": "/26 has 6 host bits. 2^6-2=62 usable host addresses."
+        }
+      },
+      {
+        "question": "You need to subnet 172.16.0.0/16 to create the maximum number of /20 subnets. How many subnets can you create?",
+        "options": [
+          "8",
+          "16",
+          "32",
+          "64"
+        ],
+        "answer": "16",
+        "explanation": {
+          "magic_number": 16,
+          "block": "172.16.0.0 - 172.16.15.255",
+          "network_id": "172.16.0.0",
+          "broadcast": "172.16.15.255",
+          "usable_range": "172.16.0.1 - 172.16.15.254",
+          "host_count": 4094,
+          "note": "Moving from /16 to /20 borrows 4 bits. 2^4=16 subnets. Each has 2^12-2=4094 usable hosts."
+        }
+      },
+      {
+        "question": "For OSPF configuration, what network statement and wildcard advertises only the interface 192.168.1.1/24 in area 0?",
+        "options": [
+          "network 192.168.1.0 0.0.0.255 area 0",
+          "network 192.168.1.1 0.0.0.0 area 0",
+          "network 192.168.0.0 0.0.255.255 area 0",
+          "network 192.168.1.0 255.255.255.0 area 0"
+        ],
+        "answer": "network 192.168.1.0 0.0.0.255 area 0",
+        "explanation": {
+          "magic_number": 256,
+          "block": "192.168.1.0 - 192.168.1.255",
+          "network_id": "192.168.1.0",
+          "broadcast": "192.168.1.255",
+          "usable_range": "192.168.1.1 - 192.168.1.254",
+          "host_count": 254,
+          "note": "OSPF uses wildcard masks. /24 wildcard = 0.0.0.255. Both options A and B are technically valid; A advertises the whole /24 network (most common practice)."
+        }
+      },
+      {
+        "question": "You need to design subnets for 4 departments: Sales (50 hosts), IT (25 hosts), HR (10 hosts), Management (5 hosts). Using VLSM on 192.168.1.0/24, what prefix gives the tightest fit for Sales?",
+        "options": [
+          "/25 (62 hosts)",
+          "/26 (62 hosts)",
+          "/26 (14 hosts)",
+          "/27 (30 hosts)"
+        ],
+        "answer": "/26 (62 hosts)",
+        "explanation": {
+          "magic_number": 64,
+          "block": "192.168.1.0 - 192.168.1.63",
+          "network_id": "192.168.1.0",
+          "broadcast": "192.168.1.63",
+          "usable_range": "192.168.1.1 - 192.168.1.62",
+          "host_count": 62,
+          "note": "/26 provides 2^6-2=62 usable hosts, which fits Sales' 50 hosts with minimal waste. /25 would give 126 hosts \u2014 oversized. VLSM allocates: Sales /26 (.0-.63), IT /27 (.64-.95), HR /28 (.96-.111), Mgmt /29 (.112-.119)."
+        }
+      },
+      {
+        "question": "What is the broadcast address of 10.10.10.0/19?",
+        "options": [
+          "10.10.10.255",
+          "10.10.31.255",
+          "10.10.63.255",
+          "10.10.15.255"
+        ],
+        "answer": "10.10.31.255",
+        "explanation": {
+          "magic_number": 32,
+          "block": "10.10.0.0 - 10.10.31.255",
+          "network_id": "10.10.0.0",
+          "broadcast": "10.10.31.255",
+          "usable_range": "10.10.0.1 - 10.10.31.254",
+          "host_count": 8190,
+          "note": "/19 in 3rd octet: magic=256-224=32. Block starting at 0: 0-31. Broadcast = 10.10.31.255."
+        }
+      },
+      {
+        "question": "A router interface has address 192.168.21.1/28. What is the usable host range for this subnet?",
+        "options": [
+          "192.168.21.1 - 192.168.21.14",
+          "192.168.21.1 - 192.168.21.30",
+          "192.168.21.1 - 192.168.21.15",
+          "192.168.21.0 - 192.168.21.15"
+        ],
+        "answer": "192.168.21.1 - 192.168.21.14",
+        "explanation": {
+          "magic_number": 16,
+          "block": "192.168.21.0 - 192.168.21.15",
+          "network_id": "192.168.21.0",
+          "broadcast": "192.168.21.15",
+          "usable_range": "192.168.21.1 - 192.168.21.14",
+          "host_count": 14,
+          "note": "/28: block size=16. Block 0-15. Network=.0, Broadcast=.15. Usable: .1-.14 (14 hosts)."
+        }
+      }
+    ]
+  }
+}
