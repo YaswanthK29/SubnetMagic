@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'https://subnetmagic-8.onrender.com',
+  baseURL: 'https://subnetmagic-01.onrender.com',
 });
 
 export const API_CONNECTION_ERROR = 'API connection failed. Verify FastAPI server is running on port 8001.';
